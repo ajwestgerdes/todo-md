@@ -1,0 +1,35 @@
+import fs from fs
+import path from path
+
+const directoryPath = '/path/to/directory';
+
+fs.readdir(directoryPath, (err, files) => {
+  if (err) throw err;
+
+  files.forEach(file => {
+    const filePath = path.join(directoryPath, file);
+
+    const stream = fs.createReadStream(filePath, { highWaterMark: 64 * 1024 });
+
+    let remaining = '';
+
+    stream.on('data', chunk => {
+      const lines = (remaining + chunk).split('\n');
+      remaining = lines.pop();
+
+      lines.forEach(line => {
+        if (line.includes('TODO:')) {
+            console.log('TODO found')
+            console.log(line)
+        }
+        console.log(line)
+      });
+    });
+
+    stream.on('end', () => {
+      if (remaining) {
+        console.log('new line end')
+      }
+    });
+  });
+});
