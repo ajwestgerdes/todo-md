@@ -20,8 +20,6 @@ fs.readdir(directoryPath, (err, files) => {
 
       lines.forEach(line => {
         if (line.includes('TODO:')) {
-            console.log('TODO found')
-            console.log(line)
             writeMarkdownFile(line)
         }
         console.log(line)
