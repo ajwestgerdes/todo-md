@@ -1,8 +1,9 @@
 import fs from 'fs'
 import path from 'path'
-import writeMarkdownFile from './create-md.js';
+import {writeMarkdownFile, addTodo} from './create-md.js';
 
 const directoryPath = './testDir';
+const markdownFilePath = './todo.md'
 
 function traverseDirectory(dir) {
   const files = fs.readdirSync(dir);
@@ -22,7 +23,10 @@ function traverseDirectory(dir) {
         const lines = data.split('\n');
   
         lines.forEach((line) => {
-          if (line.includes('// TODO:')) writeMarkdownFile(line)
+          if (line.includes('// TODO:')) {
+            console.log(line.split('// TODO: '))
+            addTodo(markdownFilePath, line.split('// TODO: ')[1])
+          } 
         });
       });
     }

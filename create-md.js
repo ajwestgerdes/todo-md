@@ -1,8 +1,8 @@
 import fs from "fs"
 
-export default function writeMarkdownFile(line) {
-    const markdownFilePath = './todo.md'
-    const writeStream = fs.createWriteStream(markdownFilePath);
+export function writeMarkdownFile(filePath, line) {
+    
+    const writeStream = fs.createWriteStream(filePath);
 
     console.log('lines in writeMarkdownFile')
     console.log(line)
@@ -13,5 +13,16 @@ export default function writeMarkdownFile(line) {
   
     writeStream.on('finish', () => {
       console.log('Markdown file written successfully');
+    });
+  }
+
+
+  export function addTodo(filename, lines) {
+    console.log(lines)
+    console.log(`## ${lines}`)
+
+    fs.appendFile(filename, `## ${lines} \n`, (err) => {
+      if (err) throw err;
+      console.log('line appended');
     });
   }
