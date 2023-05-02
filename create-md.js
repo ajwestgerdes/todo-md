@@ -17,9 +17,17 @@ export function writeMarkdownFile(filePath, line) {
   }
 
 
-  export function addTodo(filename, lines) {
+  export function addTodo(filename, lines, format) {
     console.log(lines)
     console.log(`## ${lines}`)
+
+    if(format === 1) {
+      fs.appendFile(filename, `${lines} \n`, (err) => {
+        if (err) throw err;
+        console.log('line appended');
+      });
+    }
+
 
     fs.appendFile(filename, `## ${lines} \n`, (err) => {
       if (err) throw err;

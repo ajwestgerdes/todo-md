@@ -25,8 +25,12 @@ function traverseDirectory(dir) {
         lines.forEach((line) => {
           if (line.includes('// TODO:')) {
             console.log(line.split('// TODO: '))
-            addTodo(markdownFilePath, line.split('// TODO: ')[1])
-          } 
+            addTodo(markdownFilePath, line.split('// TODO: ')[1], 0)
+          }
+          if (line.includes('```')) {
+            console.log(line.split('```'))
+            addTodo(markdownFilePath, line.split('```')[1], 1)
+          }
         });
       });
     }
