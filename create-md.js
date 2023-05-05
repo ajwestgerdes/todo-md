@@ -21,6 +21,9 @@ export function writeMarkdownFile(filePath, line) {
     console.log(lines)
     console.log(`## ${lines}`)
 
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    if (fileContents.includes(lineToWrite)) return
+
     if(format === 1) {
       fs.appendFile(filename, `${lines} \n`, (err) => {
         if (err) throw err;
