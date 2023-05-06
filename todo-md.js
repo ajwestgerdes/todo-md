@@ -23,6 +23,20 @@ function traverseDirectory(dir) {
         const lines = data.split('\n');
   
         lines.forEach((line) => {
+          if (line.trim().startsWith('/* TODO')) {
+            isInsideMultilineComment = true;
+          }
+        
+          if (isInsideMultilineComment) {
+            multilineCommentLines.push(line);
+        
+            if (line.trim().endsWith('*/')) {
+              isInsideMultilineComment = false;
+              addTodo(markdownFilePath, multilineCommentLines, 0)
+            }
+          }
+
+
           if (line.includes('// TODO:')) {
             console.log(line.split('// TODO: '))
             addTodo(markdownFilePath, line.split('// TODO: ')[1], 0)
@@ -36,5 +50,6 @@ function traverseDirectory(dir) {
     }
   });
 }
+
 
 traverseDirectory(directoryPath);
