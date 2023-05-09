@@ -23,19 +23,14 @@ function traverseDirectory(dir) {
         const lines = data.split('\n');
   
         lines.forEach((line) => {
-          if (line.trim().startsWith('/* TODO')) {
-            isInsideMultilineComment = true;
-          }
-        
-          if (isInsideMultilineComment) {
-            multilineCommentLines.push(line);
-        
-            if (line.trim().endsWith('*/')) {
-              isInsideMultilineComment = false;
-              addTodo(markdownFilePath, multilineCommentLines, 0)
-            }
-          }
+          const file = fs.readFileSync('file.js', 'utf8');
+          const multiLineReg = /\/\*([\s\S]*?)\*\//g;
+          const multiLine = file.match(multiLineReg);
 
+          if (multiLine) {
+            // Write the multiline comment lines to a new file
+            addTodo(markdownFilePath, line, 0)
+          }
 
           if (line.includes('// TODO:')) {
             console.log(line.split('// TODO: '))
