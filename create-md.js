@@ -25,7 +25,7 @@ export function writeMarkdownFile(filePath, line) {
     if (fileContents.includes(lineToWrite)) return
 
     if(format === 1) {
-      fs.appendFile(filename, `${lines} \n`, (err) => {
+      fs.appendFile(filename, ``` ${lines} \n ```, (err) => {
         if (err) throw err;
         console.log('line appended');
       });
