@@ -4,5 +4,8 @@
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
     "vscode": "^1.1.37"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
   }
 }
