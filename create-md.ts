@@ -1,6 +1,6 @@
 import fs from "fs"
 
-export function writeMarkdownFile(filePath, line) {
+export function writeMarkdownFile(filePath: string, line: string) {
     
     const writeStream = fs.createWriteStream(filePath);
 
@@ -17,22 +17,20 @@ export function writeMarkdownFile(filePath, line) {
   }
 
 
-  export function addTodo(filename, lines, format) {
-    console.log(lines)
-    console.log(`## ${lines}`)
+  export function addTodo(filename: string, line: string, format: number) {
 
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    if (fileContents.includes(lineToWrite)) return
+    const fileContents = fs.readFileSync(filename, 'utf8');
+    if (fileContents.includes(line)) return
 
     if(format === 1) {
-      fs.appendFile(filename, ``` ${lines} \n ```, (err) => {
+      fs.appendFile(filename, ``` ${line} \n ```, (err) => {
         if (err) throw err;
         console.log('line appended');
       });
     }
 
 
-    fs.appendFile(filename, `## ${lines} \n`, (err) => {
+    fs.appendFile(filename, `## ${line} \n`, (err) => {
       if (err) throw err;
       console.log('line appended');
     });

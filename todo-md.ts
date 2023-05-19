@@ -5,9 +5,9 @@ import {writeMarkdownFile, addTodo} from './create-md.js';
 const directoryPath = './testDir';
 const markdownFilePath = './todo.md'
 
-function traverseDirectory(dir) {
+function traverseDirectory(dir: string) {
   const files = fs.readdirSync(dir);
-  files.forEach(file => {
+  files.forEach((file: string) => {
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
     if (stat.isDirectory()) {
@@ -22,7 +22,7 @@ function traverseDirectory(dir) {
   
         const lines = data.split('\n');
   
-        lines.forEach((line) => {
+        lines.forEach((line: string) => {
           const file = fs.readFileSync('file.js', 'utf8');
           const multiLineReg = /\/\*([\s\S]*?)\*\//g;
           const multiLine = file.match(multiLineReg);
