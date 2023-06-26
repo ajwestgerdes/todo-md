@@ -1,11 +1,13 @@
 import './App.css';
 import { useState } from 'react';
+import { CreateTodo } from './CreateTodo';
 
 interface Todo {
   id: number;
   name: string;
   completed: boolean;
 }
+
 
 function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -45,6 +47,7 @@ function App() {
   return (
     <div className="App">
       <TodoList />
+      <CreateTodo onSubmit={placeholder()} />
     </div>
   );
 }
